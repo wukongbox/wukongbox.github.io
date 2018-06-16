@@ -275,13 +275,13 @@ SITE_BASE&#xFF1A;&#x90E8;&#x7F72;&#x7684;&#x6839;&#x76EE;&#x5F55;
 SUMMARY &lt;- &#x8FD9;&#x91CC;&#x5217;&#x51FA;&#x8BFB;&#x5230;&#x7684;&#x914D;&#x7F6E;&#x4FE1;&#x606F;
 =======
 
-SITE_BASE   : /app/sites/mixpace
+SITE_BASE   : /app/sites/default
 WEB_DOMAIN  : http://work.mixpace.com
 
-DB_URL      : rm-bp102w6mm3j4x796m.mysql.rds.aliyuncs.com
+DB_URL      : host
 DB_PORT     : 3306
-DB_USER     : wkbox
-DB_NAME     : wkbox
+DB_USER     : user
+DB_NAME     : pass
 
 Package found : &lt;- &#x8FD9;&#x91CC;&#x5217;&#x51FA;&#x53D1;&#x73B0;&#x7684;&#x66F4;&#x65B0;&#x6587;&#x4EF6; 
 /home/app/deploy/./package/ROOT.war 2018-05-07 21:02:12.109339015 +0800
@@ -301,24 +301,24 @@ Type &quot;YES&quot; to proceed : YES  &lt;- &#x786E;&#x8BA4;&#x4EE5;&#x4E0A;&#x
 2018-05-07:21:10:14 Done.
 &lt;&lt;&lt; Warning &gt;&gt;&gt; Please confirm you are ready for update. This introduces a small downtime.
 Type &quot;YES&quot; to proceed : YES  &lt;- &#x786E;&#x8BA4;&#x8981;&#x66F4;&#x65B0;&#xFF0C;&#x624B;&#x5DE5;&#x952E;&#x5165;YES
-2018-05-07:21:10:16 Deploy /home/app/deploy/./package/web.tar.gz to /app/sites/mixpace ...
+2018-05-07:21:10:16 Deploy /home/app/deploy/./package/web.tar.gz to /app/sites/default ...
 2018-05-07:21:10:17 Moving /home/app/deploy/./package/web.tar.gz to /home/app/deploy/./package/web.tar.gz.20180507211004
 2018-05-07:21:10:17 Shutting down app server on /app/sites/mixpace/tomcat-core
-Using CATALINA_BASE:   /app/sites/mixpace/tomcat-core
-Using CATALINA_HOME:   /app/sites/mixpace/tomcat-core
-Using CATALINA_TMPDIR: /app/sites/mixpace/tomcat-core/temp
+Using CATALINA_BASE:   /app/sites/default/tomcat-core
+Using CATALINA_HOME:   /app/sites/default/tomcat-core
+Using CATALINA_TMPDIR: /app/sites/default/tomcat-core/temp
 Using JRE_HOME:        /app/jdk
-Using CLASSPATH:       /app/sites/mixpace/tomcat-core/bin/bootstrap.jar:/app/sites/mixpace/tomcat-core/bin/tomcat-juli.jar
-Using CATALINA_PID:    /app/sites/mixpace/tomcat-core/bin/catalina.pid
+Using CLASSPATH:       /app/sites/default/tomcat-core/bin/bootstrap.jar:/app/sites/default/tomcat-core/bin/tomcat-juli.jar
+Using CATALINA_PID:    /app/sites/default/tomcat-core/bin/catalina.pid
 Tomcat stopped.
-2018-05-07:21:10:18 Move /home/app/deploy/./package/ROOT.war to /app/sites/mixpace/tomcat-core ...
-2018-05-07:21:10:19 Starting up app server on /app/sites/mixpace/tomcat-core
-Using CATALINA_BASE:   /app/sites/mixpace/tomcat-core
-Using CATALINA_HOME:   /app/sites/mixpace/tomcat-core
-Using CATALINA_TMPDIR: /app/sites/mixpace/tomcat-core/temp
+2018-05-07:21:10:18 Move /home/app/deploy/./package/ROOT.war to /app/sites/default/tomcat-core ...
+2018-05-07:21:10:19 Starting up app server on /app/sites/default/tomcat-core
+Using CATALINA_BASE:   /app/sites/default/tomcat-core
+Using CATALINA_HOME:   /app/sites/default/tomcat-core
+Using CATALINA_TMPDIR: /app/sites/default/tomcat-core/temp
 Using JRE_HOME:        /app/jdk
-Using CLASSPATH:       /app/sites/mixpace/tomcat-core/bin/bootstrap.jar:/app/sites/mixpace/tomcat-core/bin/tomcat-juli.jar
-Using CATALINA_PID:    /app/sites/mixpace/tomcat-core/bin/catalina.pid
+Using CLASSPATH:       /app/sites/default/tomcat-core/bin/bootstrap.jar:/app/sites/default/tomcat-core/bin/tomcat-juli.jar
+Using CATALINA_PID:    /app/sites/default/tomcat-core/bin/catalina.pid
 Tomcat started.
 2018-05-07:21:10:19 Moving /home/app/deploy/./package/ROOT.war to /home/app/deploy/./package/ROOT.war.20180507211004
 2018-05-07:21:10:19 Done for update.
@@ -378,7 +378,7 @@ Tomcat started.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"系统维护","level":"1.3","depth":1,"next":{"title":"常见问题","level":"1.4","depth":1,"path":"faq.md","ref":"faq.md","articles":[]},"previous":{"title":"软件部署步骤","level":"1.2.1","depth":2,"path":"ch01/quick-installation.md","ref":"ch01/quick-installation.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch02/README.md","mtime":"2018-06-16T07:25:20.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-16T07:33:04.502Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"系统维护","level":"1.3","depth":1,"next":{"title":"常见问题","level":"1.4","depth":1,"path":"faq.md","ref":"faq.md","articles":[]},"previous":{"title":"软件部署步骤","level":"1.2.1","depth":2,"path":"ch01/quick-installation.md","ref":"ch01/quick-installation.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch02/README.md","mtime":"2018-06-16T07:38:48.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-16T07:38:58.778Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
