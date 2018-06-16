@@ -235,56 +235,47 @@ $ sudo chown &#x2013;R app.webapps /app
 <li>&#x89E3;&#x538B;&#x5E76;&#x79FB;&#x52A8;&#x6587;&#x4EF6;</li>
 </ul>
 <pre><code># su - app
-$ tar xzf wkb_infra.tar.gz
-$ cp jdk* /app
-$ mv *sh tomcat-* /app/sites/default
+$ tar xzf wkb_infra.tar.gz -C /app
 $ cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.org
 </code></pre><ul>
 <li>&#x4FEE;&#x6539;default.conf&#xFF0C; &#x5C06;<code>demo.wukongbox.co</code>&#x6539;&#x4E3A;&#x5B9E;&#x9645;&#x57DF;&#x540D;&#x3002;</li>
 </ul>
 <pre><code>server
 {
-    listen 80;
-    server_name demo.wukongbox.co; #server_name end
-    index index.html index.htm index.php; #index end
-    charset utf-8;
+        listen       80;
+        server_name default.wukongbox.co; #server_name end
+        index index.html index.htm index.php; #index end
+        charset utf-8;
 
-    root  /app/sites/default/web;
-    include rewrite/amh.conf; #rewrite end
+        root  /app/sites/default/web;
 
-    #error_page
-        error_page 400 /ErrorPages/400.html;
-        error_page 403 /ErrorPages/403.html;
-        error_page 404 /ErrorPages/404.html;
-        error_page 502 /ErrorPages/502.html;
+    if (!-e $request_filename) {
+        rewrite ^(.*)\.php $1.api last;
+    }
+
+        #error_page
+                error_page 400 /ErrorPages/400.html;
+                error_page 403 /ErrorPages/403.html;
+                error_page 404 /ErrorPages/404.html;
+                error_page 502 /ErrorPages/502.html;
         location ~ /ErrorPages/(400|401|403|404|405|500|502|503)\.html$
-    {
-                /app/sites/default/web;
+        {
+                root /app/sites/mixpace/web;
         }
 
 
-    location ~ .*\.php$
-    {
-            try_files $uri =404;
-                fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
-                fastcgi_index index.php;
-                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-                include fastcgi_params;
+
+        location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|mp3|wma)$
+        {
+                #expires      30d;
         }
 
-    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|mp3|wma)$
-    {
-        #expires      30d;
-    }
+        location ~ .*\.(js|css)$
+        {
+                #expires      12h;
+        }
 
-    location ~ .*\.(js|css)$
-    {
-                add_header Cache-Control no-store;
-                add_header Pragma no-cache;
-        #expires      12h;
-    }
-
-    location /core/ {
+        location /core/ {
                 default_type text/html;
                 #subs_filter_types text/css text/xml;
                 proxy_set_header X-Real-IP  $remote_addr;
@@ -303,12 +294,11 @@ $ cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.org
                 proxy_set_header Referer $http_referer;
                 proxy_set_header X-Forwarded-Proto  $scheme;
                 proxy_set_header Host $Host;
-                proxy_pass http://127.0.0.1:8090/pay/;
+                proxy_pass http://127.0.0.1:8081/pay/;
     }
 
-    access_log /var/log/nginx/access_wkb.log; #access_log end
-    error_log /var/log/nginx/error_wkb.log; #error_log end
-
+        access_log /dev/null; #access_log end
+        error_log /var/log/nginx/error_default.log; #error_log end
 }
 </code></pre><ul>
 <li>&#x5C06;&#x914D;&#x7F6E;&#x8FDE;&#x63A5;&#x5165;nginx</li>
@@ -324,12 +314,12 @@ $ sudo netstat &#x2013;nlp | grep 80
 </code></pre><ul>
 <li>&#x542F;&#x52A8;tomcat</li>
 </ul>
-<pre><code>su - app
-/app/sites/default/corectl.sh start
-/app/sites/default/pay.sh start
-ps &#x2013;ef | grep java
-netstat &#x2013;nlp | grep 80
-</code></pre><h1 id="&#x624B;&#x7EED;&#x5DE5;&#x4F5C;">&#x624B;&#x7EED;&#x5DE5;&#x4F5C;</h1>
+<pre><code>$ su - app
+$ /app/sites/default/corectl.sh start
+$ /app/sites/default/pay.sh start
+$ ps &#x2013;ef | grep java
+$ nettstat &#x2013;nlp | grep 80
+</code></pre><h1 id="&#x540E;&#x7EED;&#x5DE5;&#x4F5C;">&#x540E;&#x7EED;&#x5DE5;&#x4F5C;</h1>
 <h2 id="&#x81EA;&#x52A8;&#x542F;&#x52A8;&#x8BBE;&#x7F6E;">&#x81EA;&#x52A8;&#x542F;&#x52A8;&#x8BBE;&#x7F6E;</h2>
 <ul>
 <li>nginx &#x81EA;&#x52A8;&#x542F;&#x52A8;</li>
@@ -387,7 +377,7 @@ crontab &#x2013;e
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"软件部署步骤","level":"1.2.1","depth":2,"next":{"title":"系统维护","level":"1.3","depth":1,"path":"ch02/README.md","ref":"ch02/README.md","articles":[]},"previous":{"title":"服务器部署","level":"1.2","depth":1,"path":"ch01/README.md","ref":"ch01/README.md","articles":[{"title":"软件部署步骤","level":"1.2.1","depth":2,"path":"ch01/quick-installation.md","ref":"ch01/quick-installation.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch01/quick-installation.md","mtime":"2018-06-16T05:48:47.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-16T06:17:18.583Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"软件部署步骤","level":"1.2.1","depth":2,"next":{"title":"系统维护","level":"1.3","depth":1,"path":"ch02/README.md","ref":"ch02/README.md","articles":[]},"previous":{"title":"服务器部署","level":"1.2","depth":1,"path":"ch01/README.md","ref":"ch01/README.md","articles":[{"title":"软件部署步骤","level":"1.2.1","depth":2,"path":"ch01/quick-installation.md","ref":"ch01/quick-installation.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch01/quick-installation.md","mtime":"2018-06-16T07:24:48.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-16T07:33:04.502Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
