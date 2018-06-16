@@ -1,0 +1,426 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>软件部署步骤 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../ch02/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    服务器部署
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.1" data-path="quick-installation.html">
+            
+                <a href="quick-installation.html">
+            
+                    
+                    软件部署步骤
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ch02/">
+            
+                <a href="../ch02/">
+            
+                    
+                    系统维护
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../faq.html">
+            
+                <a href="../faq.html">
+            
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >软件部署步骤</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x51C6;&#x5907;">&#x51C6;&#x5907;</h1>
+<ul>
+<li>&#x521B;&#x5EFA;&#x7528;&#x6237;</li>
+</ul>
+<pre><code>$ sudo groupadd webapps
+$ sudo useradd -g webapps app
+</code></pre><ul>
+<li>&#x521B;&#x5EFA;&#x76EE;&#x5F55;</li>
+</ul>
+<pre><code>$ sudo mkdir &#x2013;p /app/deploy
+ /app/log
+ /app/sites/default/kefile
+$ sudo chown &#x2013;R app.webapps /app
+</code></pre><ul>
+<li>&#x68C0;&#x67E5;80&#xFF0C;8080&#xFF0C;8090&#x7AEF;&#x53E3;&#x662F;&#x5426;&#x53EF;&#x7528;</li>
+</ul>
+<pre><code>$ sudo netstat -nlp | grep 80
+</code></pre><ul>
+<li>&#x5B89;&#x88C5;&#x5FC5;&#x8981;&#x7684;&#x5305;</li>
+</ul>
+<p>CentOS:</p>
+<pre><code>$ sudo yum install -y nginx mysql zip unzip
+</code></pre><p>Ubuntu/Debian</p>
+<pre><code>$ sudo apt-get install -y nginx mysql zip unzip
+</code></pre><h1 id="&#x5B89;&#x88C5;&#x6587;&#x4EF6;">&#x5B89;&#x88C5;&#x6587;&#x4EF6;</h1>
+<ul>
+<li>&#x4E0B;&#x8F7D;&#x5B89;&#x88C5;&#x5305;&#x5230;<code>/app/deploy</code></li>
+<li>&#x89E3;&#x538B;&#x5E76;&#x79FB;&#x52A8;&#x6587;&#x4EF6;</li>
+</ul>
+<pre><code># su - app
+$ tar xzf wkb_infra.tar.gz
+$ cp jdk* /app
+$ mv *sh tomcat-* /app/sites/default
+$ cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.org
+</code></pre><ul>
+<li>&#x4FEE;&#x6539;default.conf&#xFF0C; &#x5C06;<code>demo.wukongbox.co</code>&#x6539;&#x4E3A;&#x5B9E;&#x9645;&#x57DF;&#x540D;&#x3002;</li>
+</ul>
+<pre><code>server
+{
+    listen 80;
+    server_name demo.wukongbox.co; #server_name end
+    index index.html index.htm index.php; #index end
+    charset utf-8;
+
+    root  /app/sites/default/web;
+    include rewrite/amh.conf; #rewrite end
+
+    #error_page
+        error_page 400 /ErrorPages/400.html;
+        error_page 403 /ErrorPages/403.html;
+        error_page 404 /ErrorPages/404.html;
+        error_page 502 /ErrorPages/502.html;
+        location ~ /ErrorPages/(400|401|403|404|405|500|502|503)\.html$
+    {
+                /app/sites/default/web;
+        }
+
+
+    location ~ .*\.php$
+    {
+            try_files $uri =404;
+                fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                include fastcgi_params;
+        }
+
+    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|mp3|wma)$
+    {
+        #expires      30d;
+    }
+
+    location ~ .*\.(js|css)$
+    {
+                add_header Cache-Control no-store;
+                add_header Pragma no-cache;
+        #expires      12h;
+    }
+
+    location /core/ {
+                default_type text/html;
+                #subs_filter_types text/css text/xml;
+                proxy_set_header X-Real-IP  $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header Referer $http_referer;
+                proxy_set_header X-Forwarded-Proto  $scheme;
+                proxy_set_header Host $Host;
+                proxy_pass http://127.0.0.1:8080/;
+    }
+
+        location /pay/ {
+                default_type text/html;
+                #subs_filter_types text/css text/xml;
+                proxy_set_header X-Real-IP  $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header Referer $http_referer;
+                proxy_set_header X-Forwarded-Proto  $scheme;
+                proxy_set_header Host $Host;
+                proxy_pass http://127.0.0.1:8090/pay/;
+    }
+
+    access_log /var/log/nginx/access_wkb.log; #access_log end
+    error_log /var/log/nginx/error_wkb.log; #error_log end
+
+}
+</code></pre><ul>
+<li>&#x5C06;&#x914D;&#x7F6E;&#x8FDE;&#x63A5;&#x5165;nginx</li>
+</ul>
+<pre><code>$ sudo ln -s /app/conf/default.conf /etc/nginx/sites-enabled/wkb.conf
+</code></pre><h1 id="&#x6D4B;&#x8BD5;&#x670D;&#x52A1;">&#x6D4B;&#x8BD5;&#x670D;&#x52A1;</h1>
+<ul>
+<li>&#x542F;&#x52A8;nginx</li>
+</ul>
+<pre><code>$ sudo nginx &#x2013;t &amp; systemctl restart nginx
+$ sudo ps &#x2013;ef | grep nginx
+$ sudo netstat &#x2013;nlp | grep 80
+</code></pre><ul>
+<li>&#x542F;&#x52A8;tomcat</li>
+</ul>
+<pre><code>su - app
+/app/sites/default/corectl.sh start
+/app/sites/default/pay.sh start
+ps &#x2013;ef | grep java
+netstat &#x2013;nlp | grep 80
+</code></pre><h1 id="&#x624B;&#x7EED;&#x5DE5;&#x4F5C;">&#x624B;&#x7EED;&#x5DE5;&#x4F5C;</h1>
+<h2 id="&#x81EA;&#x52A8;&#x542F;&#x52A8;&#x8BBE;&#x7F6E;">&#x81EA;&#x52A8;&#x542F;&#x52A8;&#x8BBE;&#x7F6E;</h2>
+<ul>
+<li>nginx &#x81EA;&#x52A8;&#x542F;&#x52A8;</li>
+</ul>
+<pre><code>$ sudo systemctl enable nginx
+</code></pre><ul>
+<li>tomcat &#x81EA;&#x52A8;&#x542F;&#x52A8;</li>
+</ul>
+<p>&#x7F16;&#x8F91;crond</p>
+<pre><code>su - app
+crontab &#x2013;e
+</code></pre><p>&#x589E;&#x52A0;</p>
+<pre><code>@reboot /app/sites/default/corectl.sh start
+@reboot /app/sites/default/payctl.sh start
+</code></pre>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 服务器部署">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../ch02/" class="navigation navigation-next " aria-label="Next page: 系统维护">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"软件部署步骤","level":"1.2.1","depth":2,"next":{"title":"系统维护","level":"1.3","depth":1,"path":"ch02/README.md","ref":"ch02/README.md","articles":[]},"previous":{"title":"服务器部署","level":"1.2","depth":1,"path":"ch01/README.md","ref":"ch01/README.md","articles":[{"title":"软件部署步骤","level":"1.2.1","depth":2,"path":"ch01/quick-installation.md","ref":"ch01/quick-installation.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch01/quick-installation.md","mtime":"2018-06-16T05:48:47.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-16T06:17:18.583Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
